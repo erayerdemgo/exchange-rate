@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        var socket = new WebSocket("ws://localhost:8080/ws");
+
+        socket.onopen = function () {
+            console.log("connection succes")
+        };
+
+        socket.onclose = function () {
+            console.log("bağlantı koptu")
+        };
+        socket.onmessage = function (e) {
+            let {dolar, euro} = JSON.parse(e.data);
+
+            let dolarid = document.getElementById("dolar").innerText;
+            let euroid = document.getElementById("euro").innerText;
+            document.getElementById("dolar").innerText="dsadas"
+            if (dolarid > dolar) {
+                document.getElementById("dolarst").style.backgroundColor = "green"
+            } else {
+                document.getElementById("dolarst").style.backgroundColor = "red"
+            }
+            if (euroid > euro) {
+                document.getElementById("eurost").style.backgroundColor = "green"
+            } else {
+                document.getElementById("eurost").style.backgroundColor = "red"
+            }
+            document.getElementById("euro").innerText=euro
+            document.getElementById("dolar").innerText=dolar
+            euroid=euro;
+        };
+
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+<div class="container" style="padding-top: 250px; width: 400px;">
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Kur</th>
+            <th scope="col">Değer</th>
+            <th scope="col">Durum</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Dolar/Tl</td>
+            <td id="dolar"></td>
+            <td id="dolarst" style="background-color: green"></td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Euro/Tl</td>
+            <td id="euro">Thornton</td>
+            <td id="eurost" style="background-color: green"></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+
+</html>
