@@ -2,11 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/antchfx/htmlquery"
-	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/antchfx/htmlquery"
+	"github.com/gorilla/websocket"
 )
 
 var upgrader = websocket.Upgrader{
@@ -23,12 +24,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	for {
 
 		time.Sleep(time.Second * 2)
-		url, err := htmlquery.LoadURL("https://dovizborsa.com/doviz/dolar")
+		url, err := htmlquery.LoadURL("https://dovizborsa.com/doviz")
 		if err != nil {
 			log.Fatal(err)
 		}
-		dolar, err := htmlquery.Query(url, "/html/body/div/div[2]/div/div[1]/div[1]/div/div[3]/div/div[2]/div/div/div[1]/div[2]/p[1]")
-		euro, err := htmlquery.Query(url, "/html/body/div/div[2]/div/div[1]/div[1]/div/div[3]/div/div[2]/div/div/div[2]/div[2]/p[1]")
+		dolar, err := htmlquery.Query(url, "/html/body/div/div[2]/div/div[1]/div[1]/div/div[1]/div[1]/div[2]/span[1]")
+		euro, err := htmlquery.Query(url, "/html/body/div/div[2]/div/div[1]/div[1]/div/div[1]/div[2]/div[2]/span[1]")
 
 		if err != nil {
 			log.Fatal(err)
